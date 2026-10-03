@@ -1,49 +1,45 @@
-// Animaciones de Campo Somático: aparición al hacer scroll, contador, barra de progreso,
+// Animaciones de Campo Somático: detalles que aparecen al hacer scroll, contador, barra de progreso,
 // menú activo y un leve parallax en la portada.
 (() => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---------- 1. Marcar qué aparece al hacer scroll ----------
-  // [selector, tipo de entrada, ¿escalonar entre hermanos?]
-  const groups = [
-    [".section .eyebrow", "rv"],
-    [".section h2", "rv"],
-    [".why .lead, .why .muted, .head > p, .proposal .two > div > p, .join .two > div > p", "rv"],
-    [".pillar", "rv rv-right", true],
-    [".areas .area", "rv", true],
-    [".list li", "rv rv-right", true],
-    [".spaces .card", "rv", true],
-    [".total", "rv rv-scale"],
-    [".week", "rv", true],
-    [".always, .note", "rv"],
-    [".who h4", "rv"],
-    [".who-cols > div > .bul li, .box h3, .box .bul li", "rv rv-left", true],
-    [".box", "rv rv-scale"],
-    [".pull", "rv"],
-    [".form", "rv rv-scale"],
-    [".start-pill", "rv rv-left"],
-    [".stepper", "rv rv-scale"],
-    [".list-label", "rv"],
-    [".placa p, .placa .cap", "rv"],
-    [".c5", "rv rv-scale", true],
-    [".rec p", "rv"],
-    [".tile", "rv rv-scale", true],
-    [".about .photo", "rv"],
-    [".about .lead, .about .muted, .about .sign", "rv"],
+  // ---------- 1. Detalles que se animan al aparecer ----------
+  // El contenido principal (títulos, textos, tarjetas, listas, foto) se ve al instante.
+  // Solo se animan detalles: números, píldoras, frases en cursiva, íconos, la línea y la firma.
+  // [selector, clases]
+  const details = [
+    [".pillar .dot", "rv rv-pop"],
+    [".area .big", "rv rv-left"],
+    [".area .tag", "rv rv-pop"],
+    [".area .chip b", "rv rv-pop"],
+    [".start-pill b", "rv rv-pop"],
+    [".stepper .s", "rv rv-pop"],
+    [".list .k", "rv"],
+    [".list .f", "rv rv-pop"],
+    [".c5 b", "rv rv-pop"],
+    [".card .tl", "rv"],
+    [".card .pause", "rv rv-pop"],
+    [".tile svg", "rv rv-pop"],
+    [".eq", "rv"],
+    [".pull i", "rv rv-draw"],
+    [".pull svg", "rv rv-pop"],
+    [".about .sign", "rv rv-sign"],
   ];
 
-  const targets = [];
-  groups.forEach(([selector, classes, stagger]) => {
+  // Cada detalle se dispara cuando entra en pantalla el bloque que lo contiene
+  // (así funciona también con detalles que arrancan sin tamaño, como la línea).
+  const groupsByTrigger = new Map();
+  details.forEach(([selector, classes]) => {
     document.querySelectorAll(selector).forEach((el) => {
-      if (el.closest(".hero")) return;
       el.classList.add(...classes.split(" "));
-      if (stagger) {
-        const i = Array.from(el.parentElement.children).indexOf(el);
-        el.style.setProperty("--d", Math.min(i, 4) * 0.05 + "s");
-      }
-      targets.push(el);
+      const trigger = el.closest(".area, .card, .pillar, .stepper, .list li, .chips5, .tile, .pull, .about, .start-pill") || el.parentElement;
+      if (!groupsByTrigger.has(trigger)) groupsByTrigger.set(trigger, []);
+      const group = groupsByTrigger.get(trigger);
+      el.style.setProperty("--d", (0.12 + Math.min(group.length, 6) * 0.08).toFixed(2) + "s");
+      group.push(el);
     });
   });
+  const targets = Array.from(groupsByTrigger.values()).flat();
 
   const counters = document.querySelectorAll("[data-count]");
 
@@ -54,13 +50,13 @@
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("in");
+          groupsByTrigger.get(entry.target).forEach((el) => el.classList.add("in"));
           io.unobserve(entry.target);
         });
       },
-      { threshold: 0, rootMargin: "0px 0px 8% 0px" }
+      { threshold: 0.2 }
     );
-    targets.forEach((el) => io.observe(el));
+    groupsByTrigger.forEach((_, trigger) => io.observe(trigger));
 
     // ---------- 2. Contador "6 encuentros" ----------
     const countIO = new IntersectionObserver((entries) => {
@@ -69,7 +65,7 @@
         const el = entry.target;
         const end = Number(el.dataset.count);
         const start = performance.now();
-        const dur = 800;
+        const dur = 1000;
         el.textContent = "0";
         const tick = (now) => {
           const t = Math.min((now - start) / dur, 1);
