@@ -21,6 +21,13 @@
     [".box", "rv rv-scale"],
     [".pull", "rv"],
     [".form", "rv rv-scale"],
+    [".start-pill", "rv rv-left"],
+    [".stepper", "rv rv-scale"],
+    [".list-label", "rv"],
+    [".placa p, .placa .cap", "rv"],
+    [".c5", "rv rv-scale", true],
+    [".rec p", "rv"],
+    [".tile", "rv rv-scale", true],
   ];
 
   const targets = [];
