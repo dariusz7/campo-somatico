@@ -87,12 +87,15 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* "Empezamos aquí": el 05 late con un halo */
-  .stepper .s.on::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--ochre-soft);
-    animation: halo 2.4s ease-out infinite; }
-  @keyframes halo { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
-  .start-pill b { animation: nudge 2.2s ease-in-out infinite; }
-  @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+  /* De a poco: el 05 late con un halo y las otras áreas orbitan despacio a su alrededor */
+  .growth .halo-ring { transform-box: fill-box; transform-origin: center; animation: haloPulse 3.2s ease-out infinite; }
+  .growth .halo-ring.h2r { animation-delay: 1.6s; }
+  @keyframes haloPulse { 0% { transform: scale(.92); opacity: 1; } 100% { transform: scale(1.22); opacity: 0; } }
+  .growth .orbit-ring { transform-box: view-box; transform-origin: 50% 50%; animation: spin 90s linear infinite; }
+  .growth .sat { transform-box: fill-box; transform-origin: center; animation: spin 90s linear infinite reverse; }
+  .growth .sat circle { transform-box: fill-box; transform-origin: center; }
+  .proposal .next span { display: inline-block; animation: bob 2.2s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 
 
   /* Grabaciones: el play late y el audio suena */

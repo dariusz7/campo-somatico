@@ -12,11 +12,9 @@
     [".area .big", "rv rv-left"],
     [".area .tag", "rv rv-pop"],
     [".area .chip b", "rv rv-pop"],
-    [".start-pill b", "rv rv-pop"],
-    [".stepper .s", "rv rv-pop"],
+    [".growth .sat circle", "rv rv-pop"],
     [".list .k", "rv"],
     [".list .f", "rv rv-pop"],
-    [".c5 b", "rv rv-pop"],
     [".card .tl", "rv"],
     [".card .pause", "rv rv-pop"],
     [".tile svg", "rv rv-pop"],
@@ -32,7 +30,7 @@
   details.forEach(([selector, classes]) => {
     document.querySelectorAll(selector).forEach((el) => {
       el.classList.add(...classes.split(" "));
-      const trigger = el.closest(".area, .card, .pillar, .stepper, .list li, .chips5, .tile, .pull, .about, .start-pill") || el.parentElement;
+      const trigger = el.closest(".area, .card, .pillar, .growth, .list li, .tile, .pull, .about") || el.parentElement;
       if (!groupsByTrigger.has(trigger)) groupsByTrigger.set(trigger, []);
       const group = groupsByTrigger.get(trigger);
       el.style.setProperty("--d", (0.12 + Math.min(group.length, 6) * 0.08).toFixed(2) + "s");
