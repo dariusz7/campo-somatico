@@ -28,6 +28,8 @@
     [".c5", "rv rv-scale", true],
     [".rec p", "rv"],
     [".tile", "rv rv-scale", true],
+    [".about .photo", "rv"],
+    [".about .lead, .about .muted, .about .sign", "rv"],
   ];
 
   const targets = [];

@@ -305,3 +305,13 @@ p + p { margin-top: 14px; }
   .placa-ripples { width: 420px; right: -230px; top: 60px; transform: none; opacity: .3; }
 }
 @media (max-width: 420px) { .tiles { grid-template-columns: 1fr; } }
+
+/* quiénes somos */
+.about { border-top: 1px solid var(--line); }
+.about-in { align-items: center; grid-template-columns: 1.15fr 1fr; }
+.about .photo { position: relative; border-radius: 30px; overflow: hidden; box-shadow: 0 40px 80px -50px rgba(46,39,35,.55); }
+.about .photo img { display: block; width: 100%; height: auto; }
+.about .lead { font-family: var(--serif); font-size: clamp(24px, 2.6vw, 32px); line-height: 1.35; margin-top: 26px; }
+.about .muted { margin-top: 18px; }
+.about .sign { margin-top: 30px; font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--terra); }
+@media (max-width: 760px) { .about-in { grid-template-columns: 1fr; } }

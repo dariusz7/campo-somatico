@@ -153,3 +153,14 @@
   .tile { transition: transform .9s var(--soft); }
   .tile:hover { transform: translateY(-4px); }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Quiénes somos: la foto se revela con un velo suave */
+  html.js .about .photo.rv { clip-path: inset(8% 8% 8% 8% round 30px); transition: opacity 1.2s ease, translate 1.2s var(--soft), clip-path 1.4s var(--soft); }
+  html.js .about .photo.rv.in { clip-path: inset(0 0 0 0 round 30px); }
+  html.js .about .photo img { scale: 1.08; transition: scale 2.4s var(--soft); }
+  html.js .about .photo.rv.in img { scale: 1; }
+  .about .sign span { display: inline-block; }
+  html.js .about .sign.rv span { clip-path: inset(0 100% 0 0); transition: clip-path 1.6s var(--soft) .5s; }
+  html.js .about .sign.rv.in span { clip-path: inset(0 0 0 0); }
+}
