@@ -39,7 +39,7 @@
       el.classList.add(...classes.split(" "));
       if (stagger) {
         const i = Array.from(el.parentElement.children).indexOf(el);
-        el.style.setProperty("--d", Math.min(i, 6) * 0.11 + "s");
+        el.style.setProperty("--d", Math.min(i, 4) * 0.05 + "s");
       }
       targets.push(el);
     });
@@ -58,7 +58,7 @@
           io.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0, rootMargin: "0px 0px 8% 0px" }
     );
     targets.forEach((el) => io.observe(el));
 
@@ -69,7 +69,7 @@
         const el = entry.target;
         const end = Number(el.dataset.count);
         const start = performance.now();
-        const dur = 1400;
+        const dur = 800;
         el.textContent = "0";
         const tick = (now) => {
           const t = Math.min((now - start) / dur, 1);

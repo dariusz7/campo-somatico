@@ -17,18 +17,17 @@
 @media (prefers-reduced-motion: no-preference) {
 
   /* ---------- Portada: entrada al cargar ---------- */
-  html.js .hero-in > *, html.js .hero h1 .line { animation: rise 1s cubic-bezier(.2,.7,.2,1) both; }
-  html.js .hero-in > .eyebrow { animation-delay: .1s; }
+  html.js .hero-in > *, html.js .hero h1 .line { animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
   html.js .hero h1 { animation: none; }
   html.js .hero h1 .line { display: block; }
-  html.js .hero h1 .line:first-child { animation-delay: .22s; }
-  html.js .hero h1 .line:last-child { animation-delay: .38s; }
-  html.js .hero-in > .sub { animation-delay: .6s; }
-  html.js .hero-in > .hook { animation-delay: .78s; }
-  html.js .hero-in > .cta-row { animation-delay: .95s; }
-  html.js .hero .ripples { animation: fadeIn 1.6s ease .2s both; }
+  html.js .hero h1 .line:first-child { animation-delay: .05s; }
+  html.js .hero h1 .line:last-child { animation-delay: .1s; }
+  html.js .hero-in > .sub { animation-delay: .18s; }
+  html.js .hero-in > .hook { animation-delay: .24s; }
+  html.js .hero-in > .cta-row { animation-delay: .3s; }
+  html.js .hero .ripples { animation: fadeIn .8s ease both; }
 
-  @keyframes rise { from { opacity: 0; transform: translateY(28px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   /* ---------- Ondas que respiran ---------- */
@@ -48,52 +47,24 @@
   @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ---------- Aparecer al hacer scroll ---------- */
-  html.js .rv { opacity: 0; translate: 0 32px;
-    transition: opacity .9s ease var(--d, 0s), translate .9s cubic-bezier(.2,.7,.2,1) var(--d, 0s),
+  html.js .rv { opacity: 0; translate: 0 12px;
+    transition: opacity .45s ease var(--d, 0s), translate .5s cubic-bezier(.2,.7,.2,1) var(--d, 0s),
       transform .9s var(--soft) 0s, box-shadow .9s var(--soft) 0s, background-color .6s ease 0s; }
-  html.js .rv-right { translate: 40px 0; }
-  html.js .rv-left { translate: -40px 0; }
-  html.js .rv-scale { translate: 0 20px; scale: .96;
-    transition: opacity .9s ease var(--d, 0s), translate .9s cubic-bezier(.2,.7,.2,1) var(--d, 0s), scale .9s cubic-bezier(.2,.7,.2,1) var(--d, 0s),
+  html.js .rv-right { translate: 14px 0; }
+  html.js .rv-left { translate: -14px 0; }
+  html.js .rv-scale { translate: 0 8px; scale: .985;
+    transition: opacity .45s ease var(--d, 0s), translate .5s cubic-bezier(.2,.7,.2,1) var(--d, 0s), scale .5s cubic-bezier(.2,.7,.2,1) var(--d, 0s),
       transform .9s var(--soft) 0s, box-shadow .9s var(--soft) 0s; }
   html.js .rv.in { opacity: 1; translate: 0 0; scale: 1; }
 
-  /* La palabra en cursiva de cada título llega un poco después */
-  html.js h2.rv em { opacity: 0; transition: opacity 1.1s ease .45s; }
-  html.js h2.rv.in em { opacity: 1; }
-
-  /* Etiquetas: las letras se juntan */
-  html.js .eyebrow.rv { letter-spacing: .4em; transition: opacity .9s ease var(--d, 0s), translate .9s ease var(--d, 0s), letter-spacing 1.2s cubic-bezier(.2,.7,.2,1) var(--d, 0s); }
-  html.js .eyebrow.rv.in { letter-spacing: .18em; }
-
-  /* Pilares: el número aparece con un pequeño giro */
-  html.js .pillar.rv .dot { scale: 0; rotate: -90deg; transition: scale .6s cubic-bezier(.3,1.6,.5,1), rotate .6s ease; transition-delay: calc(var(--d, 0s) + .35s); }
-  html.js .pillar.rv.in .dot { scale: 1; rotate: 0deg; }
-
-  /* Áreas: el número grande entra de costado */
-  html.js .area.rv .big { opacity: 0; translate: -18px 0; transition: opacity .8s ease, translate .8s ease; transition-delay: calc(var(--d, 0s) + .3s); }
-  html.js .area.rv.in .big { opacity: 1; translate: 0 0; }
-  html.js .area.rv .tag { scale: 0; transition: scale .5s cubic-bezier(.3,1.6,.5,1); transition-delay: calc(var(--d, 0s) + .7s); }
-  html.js .area.rv.in .tag { scale: 1; }
-
-  /* Lista de la propuesta: las píldoras saltan */
-  html.js .list li.rv .f { scale: 0; transition: scale .5s cubic-bezier(.3,1.6,.5,1); transition-delay: calc(var(--d, 0s) + .4s); }
-  html.js .list li.rv.in .f { scale: 1; }
-
-  /* Calendario: cada semana se llena de a una */
-  html.js .week.rv .ev { opacity: 0; translate: 0 12px; scale: .94; transition: opacity .5s ease, translate .5s ease, scale .5s cubic-bezier(.3,1.5,.5,1); }
-  html.js .week.rv .ev:nth-of-type(1) { transition-delay: calc(var(--d, 0s) + .35s); }
-  html.js .week.rv .ev:nth-of-type(2) { transition-delay: calc(var(--d, 0s) + .55s); }
-  html.js .week.rv.in .ev { opacity: 1; translate: 0 0; scale: 1; }
-
-  /* Frase final: la línea se dibuja y los puntos rebotan */
-  html.js .pull.rv i { transform: scaleX(0); transform-origin: 0 50%; transition: transform 1.4s cubic-bezier(.2,.7,.2,1) .4s; }
+  /* Frase final: la línea se dibuja y los puntos flotan sin parar */
+  html.js .pull.rv i { transform: scaleX(0); transform-origin: 0 50%; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
   html.js .pull.rv.in i { transform: scaleX(1); }
   .pull svg { overflow: visible; }
   .pull svg circle { transform-box: fill-box; transform-origin: center; animation: drift 4.2s ease-in-out infinite; }
   .pull svg circle:nth-child(2) { animation-duration: 4.8s; animation-delay: -1.6s; }
   .pull svg circle:nth-child(3) { animation-duration: 3.8s; animation-delay: -2.9s; }
-  html.js .pull.rv svg { opacity: 0; transition: opacity 1s ease 1.2s; }
+  html.js .pull.rv svg { opacity: 0; transition: opacity .5s ease .2s; }
   html.js .pull.rv.in svg { opacity: 1; }
   @keyframes drift { 0%, 100% { transform: translateY(0) scale(1); } 25% { transform: translateY(-4px) scale(1.06); }
     50% { transform: translateY(1px) scale(.96); } 75% { transform: translateY(3px) scale(1.03); } }
@@ -131,17 +102,9 @@
   .stepper .s.on::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--ochre-soft);
     animation: halo 2.4s ease-out infinite; }
   @keyframes halo { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
-  html.js .stepper.rv .s { scale: 0; transition: scale .5s cubic-bezier(.3,1.6,.5,1); }
-  html.js .stepper.rv .s:nth-child(1) { transition-delay: .15s; } html.js .stepper.rv .s:nth-child(2) { transition-delay: .25s; }
-  html.js .stepper.rv .s:nth-child(3) { transition-delay: .35s; } html.js .stepper.rv .s:nth-child(4) { transition-delay: .45s; }
-  html.js .stepper.rv .s:nth-child(5) { transition-delay: .75s; } html.js .stepper.rv .s:nth-child(6) { transition-delay: .55s; }
-  html.js .stepper.rv.in .s { scale: 1; }
   .start-pill b { animation: nudge 2.2s ease-in-out infinite; }
   @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
 
-  /* Placa: las fichas de lo que viene aparecen de a una */
-  html.js .c5.rv b { scale: 0; transition: scale .5s cubic-bezier(.3,1.6,.5,1); transition-delay: calc(var(--d, 0s) + .25s); }
-  html.js .c5.rv.in b { scale: 1; }
 
   /* Grabaciones: el play late y el audio suena */
   .tiles .tile:nth-child(3) svg { animation: playPulse 2.6s ease-in-out infinite; }
@@ -156,11 +119,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
   /* Quiénes somos: la foto se revela con un velo suave */
-  html.js .about .photo.rv { clip-path: inset(8% 8% 8% 8% round 30px); transition: opacity 1.2s ease, translate 1.2s var(--soft), clip-path 1.4s var(--soft); }
+  html.js .about .photo.rv { clip-path: inset(3% 3% 3% 3% round 30px); transition: opacity .5s ease, translate .5s var(--soft), clip-path .7s var(--soft); }
   html.js .about .photo.rv.in { clip-path: inset(0 0 0 0 round 30px); }
-  html.js .about .photo img { scale: 1.08; transition: scale 2.4s var(--soft); }
+  html.js .about .photo img { scale: 1.03; transition: scale 1s var(--soft); }
   html.js .about .photo.rv.in img { scale: 1; }
   .about .sign span { display: inline-block; }
-  html.js .about .sign.rv span { clip-path: inset(0 100% 0 0); transition: clip-path 1.6s var(--soft) .5s; }
+  html.js .about .sign.rv span { clip-path: inset(0 100% 0 0); transition: clip-path .9s var(--soft) .1s; }
   html.js .about .sign.rv.in span { clip-path: inset(0 0 0 0); }
 }
