@@ -1,5 +1,5 @@
 // Clave de Web3Forms (https://web3forms.com). Es pública por diseño: va en el HTML del sitio.
-const WEB3FORMS_KEY = "";
+const WEB3FORMS_KEY = "5b225c37-727d-48ed-a4c6-ad232c22f72a";
 
 const form = document.getElementById("form");
 const status = form.querySelector(".status");
