@@ -14,9 +14,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,100;1,9..144,300..700,100&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="anim.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 
+<div class="progress" aria-hidden="true"></div>
 <header class="nav">
   <div class="wrap nav-in">
     <a href="#inicio" class="logo"><svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="13" fill="#B65C3B"/><circle cx="32" cy="32" r="21" fill="none" stroke="#B65C3B" stroke-width="3" opacity=".55"/><circle cx="32" cy="32" r="29" fill="none" stroke="#7E8E6B" stroke-width="3" opacity=".6"/></svg><span>Campo <em>Somático</em></span></a>
@@ -34,8 +37,8 @@
 <!-- PORTADA -->
 <section id="inicio" class="hero">
   <svg class="ripples" viewBox="0 0 1000 1000" aria-hidden="true">
-    <circle cx="500" cy="500" r="120" fill="#B65C3B"/>
-    <g fill="none">
+    <circle class="breath" cx="500" cy="500" r="120" fill="#B65C3B"/>
+    <g fill="none" class="rings">
       <circle cx="500" cy="500" r="170" stroke="#B65C3B" stroke-width="2" opacity=".75"/>
       <circle cx="500" cy="500" r="225" stroke="#B65C3B" stroke-width="1.6" opacity=".55"/>
       <circle cx="500" cy="500" r="285" stroke="#7E8E6B" stroke-width="1.6" opacity=".7"/>
@@ -43,14 +46,18 @@
       <circle cx="500" cy="500" r="420" stroke="#CF9636" stroke-width="1.2" opacity=".55"/>
       <circle cx="500" cy="500" r="495" stroke="#CF9636" stroke-width="1" opacity=".35"/>
     </g>
-    <circle cx="745" cy="385" r="16" fill="#7E8E6B"/>
-    <circle cx="300" cy="760" r="11" fill="#CF9636"/>
-    <circle cx="610" cy="830" r="7" fill="#B65C3B"/>
-    <circle cx="245" cy="520" r="6" fill="#6B4A5E"/>
+    <g class="orbit">
+      <circle cx="745" cy="385" r="16" fill="#7E8E6B"/>
+      <circle cx="610" cy="830" r="7" fill="#B65C3B"/>
+    </g>
+    <g class="orbit orbit-rev">
+      <circle cx="300" cy="760" r="11" fill="#CF9636"/>
+      <circle cx="245" cy="520" r="6" fill="#6B4A5E"/>
+    </g>
   </svg>
   <div class="wrap hero-in">
     <div class="eyebrow">Propuesta inicial · 2026</div>
-    <h1>Campo<em>Somático</em></h1>
+    <h1><span class="line">Campo</span><em class="line">Somático</em></h1>
     <p class="sub">Formación continua, comunidad e impacto social en terapia somática.</p>
     <p class="hook">Un lugar para practicar acompañado.</p>
     <div class="cta-row">
@@ -140,7 +147,7 @@
 
 <!-- PROPUESTA -->
 <section id="propuesta" class="section proposal">
-  <svg class="ripples-dark" viewBox="0 0 720 720" aria-hidden="true"><g fill="none" stroke="#F3E1BB"><circle cx="360" cy="360" r="110" stroke-width="1.5" opacity=".35"/><circle cx="360" cy="360" r="170" stroke-width="1.2" opacity=".25"/><circle cx="360" cy="360" r="235" opacity=".18"/><circle cx="360" cy="360" r="300" opacity=".12"/></g></svg>
+  <svg class="ripples-dark" viewBox="0 0 720 720" aria-hidden="true"><g fill="none" stroke="#F3E1BB" class="rings"><circle cx="360" cy="360" r="110" stroke-width="1.5" opacity=".35"/><circle cx="360" cy="360" r="170" stroke-width="1.2" opacity=".25"/><circle cx="360" cy="360" r="235" opacity=".18"/><circle cx="360" cy="360" r="300" opacity=".12"/></g></svg>
   <div class="wrap two">
     <div>
       <div class="eyebrow">La propuesta inicial</div>
@@ -212,7 +219,7 @@
         <div class="eyebrow">Cómo se vive</div>
         <h2>Un mes en <em>Campo Somático</em></h2>
       </div>
-      <div class="total"><b>6</b><span>encuentros grupales al mes</span></div>
+      <div class="total"><b data-count="6">6</b><span>encuentros grupales al mes</span></div>
     </div>
     <div class="weeks">
       <div class="week"><div class="wk">Semana 1</div>
@@ -263,8 +270,8 @@
 <!-- SUMARME -->
 <section id="sumarme" class="section join">
   <svg class="ripples join-ripples" viewBox="0 0 840 840" aria-hidden="true">
-    <circle cx="420" cy="420" r="90" fill="#7E8E6B"/>
-    <g fill="none">
+    <circle class="breath" cx="420" cy="420" r="90" fill="#7E8E6B"/>
+    <g fill="none" class="rings">
       <circle cx="420" cy="420" r="140" stroke="#7E8E6B" stroke-width="2" opacity=".7"/>
       <circle cx="420" cy="420" r="195" stroke="#7E8E6B" stroke-width="1.5" opacity=".5"/>
       <circle cx="420" cy="420" r="255" stroke="#B65C3B" stroke-width="1.4" opacity=".55"/>
@@ -315,5 +322,6 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="anim.js"></script>
 </body>
 </html>

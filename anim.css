@@ -1,0 +1,121 @@
+/* Animaciones de Campo Somático.
+   Todo lo que esconde contenido va dentro de html.js (si no carga JS, se ve todo)
+   y de prefers-reduced-motion: no-preference (quien pidió menos movimiento, no ve animaciones). */
+
+/* Barra de progreso de lectura y menú */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 20; background: var(--terra);
+  transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+.nav { transition: box-shadow .3s, background .3s; }
+.nav.scrolled { box-shadow: 0 8px 30px -18px rgba(46,39,35,.35); background: rgba(246,239,228,.95); }
+.links a:not(.btn) { position: relative; transition: color .25s; }
+.links a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px;
+  background: var(--terra); transform: scaleX(0); transform-origin: 0 50%; transition: transform .35s ease; }
+.links a.active { color: var(--terra) !important; }
+.links a.active::after, .links a:not(.btn):hover::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---------- Portada: entrada al cargar ---------- */
+  html.js .hero-in > *, html.js .hero h1 .line { animation: rise 1s cubic-bezier(.2,.7,.2,1) both; }
+  html.js .hero-in > .eyebrow { animation-delay: .1s; }
+  html.js .hero h1 { animation: none; }
+  html.js .hero h1 .line { display: block; }
+  html.js .hero h1 .line:first-child { animation-delay: .22s; }
+  html.js .hero h1 .line:last-child { animation-delay: .38s; }
+  html.js .hero-in > .sub { animation-delay: .6s; }
+  html.js .hero-in > .hook { animation-delay: .78s; }
+  html.js .hero-in > .cta-row { animation-delay: .95s; }
+  html.js .hero .ripples { animation: fadeIn 1.6s ease .2s both; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ---------- Ondas que respiran ---------- */
+  .breath { transform-box: fill-box; transform-origin: center; animation: breathe 7s ease-in-out infinite; }
+  .rings circle { transform-box: fill-box; transform-origin: center; animation: wave 7s ease-in-out infinite; }
+  .rings circle:nth-child(2) { animation-delay: .5s; }
+  .rings circle:nth-child(3) { animation-delay: 1s; }
+  .rings circle:nth-child(4) { animation-delay: 1.5s; }
+  .rings circle:nth-child(5) { animation-delay: 2s; }
+  .rings circle:nth-child(6) { animation-delay: 2.5s; }
+  .orbit { transform-box: view-box; transform-origin: 50% 50%; animation: spin 110s linear infinite; }
+  .orbit-rev { animation-duration: 150s; animation-direction: reverse; }
+  .hero .ripples { translate: 0 var(--py, 0px); will-change: translate; }
+
+  @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+  @keyframes wave { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); stroke-opacity: .55; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Aparecer al hacer scroll ---------- */
+  html.js .rv { opacity: 0; translate: 0 32px; transition: opacity .9s ease, translate .9s cubic-bezier(.2,.7,.2,1);
+    transition-delay: var(--d, 0s); }
+  html.js .rv-right { translate: 40px 0; }
+  html.js .rv-left { translate: -40px 0; }
+  html.js .rv-scale { translate: 0 20px; scale: .96; transition: opacity .9s ease, translate .9s cubic-bezier(.2,.7,.2,1), scale .9s cubic-bezier(.2,.7,.2,1);
+    transition-delay: var(--d, 0s); }
+  html.js .rv.in { opacity: 1; translate: 0 0; scale: 1; }
+
+  /* La palabra en cursiva de cada título llega un poco después */
+  html.js h2.rv em { opacity: 0; transition: opacity 1.1s ease .45s; }
+  html.js h2.rv.in em { opacity: 1; }
+
+  /* Etiquetas: las letras se juntan */
+  html.js .eyebrow.rv { letter-spacing: .4em; transition: opacity .9s ease, translate .9s ease, letter-spacing 1.2s cubic-bezier(.2,.7,.2,1); }
+  html.js .eyebrow.rv.in { letter-spacing: .18em; }
+
+  /* Pilares: el número aparece con un pequeño giro */
+  html.js .pillar.rv .dot { scale: 0; rotate: -90deg; transition: scale .6s cubic-bezier(.3,1.6,.5,1), rotate .6s ease; transition-delay: calc(var(--d, 0s) + .35s); }
+  html.js .pillar.rv.in .dot { scale: 1; rotate: 0deg; }
+
+  /* Áreas: el número grande entra de costado */
+  html.js .area.rv .big { opacity: 0; translate: -18px 0; transition: opacity .8s ease, translate .8s ease; transition-delay: calc(var(--d, 0s) + .3s); }
+  html.js .area.rv.in .big { opacity: 1; translate: 0 0; }
+  html.js .area.rv .tag { scale: 0; transition: scale .5s cubic-bezier(.3,1.6,.5,1); transition-delay: calc(var(--d, 0s) + .7s); }
+  html.js .area.rv.in .tag { scale: 1; }
+
+  /* Lista de la propuesta: las píldoras saltan */
+  html.js .list li.rv .f { scale: 0; transition: scale .5s cubic-bezier(.3,1.6,.5,1); transition-delay: calc(var(--d, 0s) + .4s); }
+  html.js .list li.rv.in .f { scale: 1; }
+
+  /* Calendario: cada semana se llena de a una */
+  html.js .week.rv .ev { opacity: 0; translate: 0 12px; scale: .94; transition: opacity .5s ease, translate .5s ease, scale .5s cubic-bezier(.3,1.5,.5,1); }
+  html.js .week.rv .ev:nth-of-type(1) { transition-delay: calc(var(--d, 0s) + .35s); }
+  html.js .week.rv .ev:nth-of-type(2) { transition-delay: calc(var(--d, 0s) + .55s); }
+  html.js .week.rv.in .ev { opacity: 1; translate: 0 0; scale: 1; }
+
+  /* Frase final: la línea se dibuja y los puntos rebotan */
+  html.js .pull.rv i { transform: scaleX(0); transform-origin: 0 50%; transition: transform 1.4s cubic-bezier(.2,.7,.2,1) .4s; }
+  html.js .pull.rv.in i { transform: scaleX(1); }
+  html.js .pull.rv.in svg circle { animation: hop .7s cubic-bezier(.3,1.6,.5,1) both; transform-box: fill-box; transform-origin: center bottom; }
+  html.js .pull.rv.in svg circle:nth-child(1) { animation-delay: 1.3s; }
+  html.js .pull.rv.in svg circle:nth-child(2) { animation-delay: 1.45s; }
+  html.js .pull.rv.in svg circle:nth-child(3) { animation-delay: 1.6s; }
+  @keyframes hop { 0% { transform: scale(0); } 60% { transform: scale(1.25) translateY(-4px); } 100% { transform: scale(1); } }
+
+  /* Botón de pausa de la supervisión con grabación */
+  .pause i { animation: pausePulse 2.8s ease-in-out infinite; transform-origin: center bottom; }
+  .pause i:nth-child(2) { animation-delay: 1.4s; }
+  @keyframes pausePulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.72); } }
+
+  /* ---------- Al pasar el mouse ---------- */
+  .area, .card, .pillar, .week, .box { transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease; }
+  .area:hover, .card:hover, .week:hover { transform: translateY(-6px); box-shadow: 0 22px 40px -26px rgba(46,39,35,.45); }
+  .pillar:hover { transform: translateX(-6px); }
+  .pillar:hover .dot { animation: wiggle .6s ease; }
+  @keyframes wiggle { 30% { transform: rotate(-12deg) scale(1.08); } 60% { transform: rotate(8deg); } }
+  .ev { transition: transform .25s ease; }
+  .ev:hover { transform: scale(1.03); }
+  .list li { transition: padding-left .35s ease; }
+  .list li:hover { padding-left: 8px; }
+  .btn { position: relative; overflow: hidden; }
+  .btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%);
+    transform: translateX(-120%); transition: transform .7s ease; }
+  .btn:hover::after { transform: translateX(120%); }
+  .btn-ghost::after { background: linear-gradient(110deg, transparent 30%, rgba(182,92,59,.12) 50%, transparent 70%); }
+
+  /* Formulario enviado */
+  .form.sent .status { animation: pop .7s cubic-bezier(.3,1.5,.5,1) both; }
+  .form.sent .status::before { content: "✓"; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%;
+    background: var(--sage-deep); color: var(--paper); font-size: 26px; margin-bottom: 14px; animation: pop .6s cubic-bezier(.3,1.6,.5,1) .25s both; }
+  @keyframes pop { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: none; } }
+}
